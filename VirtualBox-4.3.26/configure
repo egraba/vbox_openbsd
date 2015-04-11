@@ -51,6 +51,8 @@ case "$OS" in
     ;;
   freebsd)
     ;;
+  openbsd)
+    ;;
   sunos)
     OS='solaris'
     ;;
