@@ -659,7 +659,8 @@ check_libxml2()
         fail
       else
         FLGXML2=`pkg-config libxml-2.0 --cflags`
-        INCXML2=`strip_I "$FLGXML2"`
+        #INCXML2=`strip_I "$FLGXML2"`
+	INCXML2='/usr/local/include/libxml2 /usr/local/include'
         LIBXML2=`pkg-config libxml-2.0 --libs`
         cat > $ODIR.tmp_src.cc << EOF
 #include <cstdio>
@@ -676,7 +677,8 @@ extern "C" int main(void)
 #endif
 }
 EOF
-        [ -n "$INCXML2" ] && I_INCXML2=`prefix_I "$INCXML2"`
+        #[ -n "$INCXML2" ] && I_INCXML2=`prefix_I "$INCXML2"`
+	I_INCXML2='-I/usr/local/include/libxml2 -I/usr/local/include'
         if test_compile "$LIBXML2 $LIBPTHREAD $I_INCXML2" xml2 xml2; then
           if test_execute; then
             cnf_append "SDK_VBOX_LIBXML2_INCS" "$INCXML2"
