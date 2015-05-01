@@ -1293,7 +1293,8 @@ extern "C" int main(void)
   return 0;
 }
 EOF
-  [ -n "$INCX11" ] && I_INCX11=`prefix_I "$INCX11"`
+  #[ -n "$INCX11" ] && I_INCX11=`prefix_I "$INCX11"`
+  $I_INCX11=-I$INCX11
   if test_compile "$LIBX11 $LIBXCURSOR $I_INCX11" Xcursor Xcursor; then
     log_success "found"
     cnf_append "VBOX_XCURSOR_LIBS" "`strip_l "$LIBXCURSOR"`"
@@ -1322,7 +1323,8 @@ extern "C" int main(void)
   }
 }
 EOF
-  [ -n "$INCX11" ] && I_INCX11=`prefix_I "$INCX11"`
+  #[ -n "$INCX11" ] && I_INCX11=`prefix_I "$INCX11"`
+  $I_INCX11=-I$INCX11
   if test_compile "$LIBX11 $LIBXINERAMA $I_INCX11" Xinerama Xinerama; then
     log_success "found"
   fi
@@ -1351,7 +1353,8 @@ extern "C" int main(void)
   }
 }
 EOF
-  [ -n "$INCX11" ] && I_INCX11=`prefix_I "$INCX11"`
+  #[ -n "$INCX11" ] && I_INCX11=`prefix_I "$INCX11"`
+  $I_INCX11=-I$INCX11  
   if test_compile "$LIBX11 $LIBXRANDR $I_INCX11" Xrandr Xrandr; then
     log_success "found"
   fi
@@ -1406,7 +1409,8 @@ extern "C" int main(void)
   return 0;
 }
 EOF
-  [ -n "$INCX11" ] && I_INCX11=`prefix_I "$INCX11"`
+  #[ -n "$INCX11" ] && I_INCX11=`prefix_I "$INCX11"`
+  $I_INCX11=-I$INCX11  
   if test_compile "$LIBX11 $LIBXMU $I_INCX11" Xmu Xmu; then
     log_success "found"
     cnf_append "VBOX_XMU_LIBS" "`strip_l "$LIBXMU"`"
@@ -1444,7 +1448,8 @@ extern "C" int main(void)
   return 0;
 }
 EOF
-  [ -n "$INCX11" ] && I_INCX11=`prefix_I "$INCX11"`
+  #[ -n "$INCX11" ] && I_INCX11=`prefix_I "$INCX11"`
+  $I_INCX11=-I$INCX11
   if test_compile "$LIBX11 $MESA $I_INCX11" Mesa Mesa; then
     [ $PASSIVE_MESA -eq 1 ] && unset DISPLAY
     test_execute
