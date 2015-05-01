@@ -1644,7 +1644,8 @@ check_vpx()
       libvpx_ver=`pkg-config vpx --modversion 2>> $LOG`
       if [ $? -eq 0 ]; then
         FLGVPX=`pkg-config vpx --cflags`
-        INCVPX=`strip_I "$FLGVPX"`
+        #INCVPX=`strip_I "$FLGVPX"`
+	INCVPX='/usr/local/include'
         LIBVPX=`pkg-config vpx --libs`
       fi
       cat > $ODIR.tmp_src.cc << EOF
@@ -1670,7 +1671,8 @@ extern "C" int main(void)
    }
 }
 EOF
-      [ -n "$INCVPX" ] && I_INCVPX=`prefix_I "$INCVPX"`
+      #[ -n "$INCVPX" ] && I_INCVPX=`prefix_I "$INCVPX"`
+      I_INCVPX='-I/usr/local/include'
       if test_compile "$LIBVPX $I_INCVPX" vpx vpx; then
         if test_execute; then
           cnf_append "SDK_VBOX_VPX_INCS" "$INCVPX"
