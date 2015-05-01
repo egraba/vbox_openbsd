@@ -120,7 +120,11 @@ LIBPTHREAD="-lpthread"
 LIBCAP="-lcap"
 GSOAP=""
 GSOAP_IMPORT=""
-INCX11="/usr/local/include"
+if [ "$OS" = "openbsd" ]; then
+  INCX11="/usr/X11R6/include"
+else
+  INCX11="/usr/local/include"
+fi
 LIBX11="-L/usr/X11R6/lib -L/usr/X11R6/lib64 -L/usr/local/lib -lXext -lX11"
 LIBXCURSOR="-lXcursor"
 LIBXMU="-lXmu"
@@ -1264,7 +1268,8 @@ extern "C" int main(void)
   XCloseDisplay(dpy);
 }
 EOF
-  [ -n "$INCX11" ] && I_INCX11=`prefix_I "$INCX11"`
+  #[ -n "$INCX11" ] && I_INCX11=`prefix_I "$INCX11"`
+  I_INCX11=-I$INCX11
   if test_compile "$LIBX11 $I_INCX11" Xlibs Xlibs; then
     log_success "found"
   fi
