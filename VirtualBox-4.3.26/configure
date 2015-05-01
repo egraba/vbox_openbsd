@@ -1100,7 +1100,8 @@ check_sdl()
   else
     if which_wrapper sdl-config > /dev/null; then
       FLGSDL=`sdl-config --cflags`
-      INCSDL=`strip_I "$FLGSDL"`
+      #INCSDL=`strip_I "$FLGSDL"`
+      INCSDL=$FLGSDL
       LIBSDL=`sdl-config --libs`
       LIBSDLMAIN="-lSDLmain"
       FLDSDL=
@@ -1127,7 +1128,8 @@ extern "C" int main(int argc, char** argv)
 #endif
 }
 EOF
-    [ -n "$INCSDL" ] && I_INCSDL=`prefix_I "$INCSDL"`
+    #[ -n "$INCSDL" ] && I_INCSDL=`prefix_I "$INCSDL"`
+    I_INCSDL=$INCSDL
     if test_compile "$LIBSDL $LIBSDLMAIN $I_INCSDL $FLDSDL" SDL SDL; then
       if test_execute; then
         cnf_append "LIB_SDK_LIBSDL_SDL"     "`strip_l "$LIBSDL"`"
