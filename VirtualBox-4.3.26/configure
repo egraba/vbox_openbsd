@@ -135,7 +135,7 @@ LIBVNCSERVER="-lvncserver"
 INCDEVMAPPER=""
 LIBDEVMAPPER="-ldevmapper"
 CXX_FLAGS=""
-if [ "$OS" = "freebsd" ]; then
+if [ "$OS" = "freebsd" ] || [ "$OS" = "openbsd" ]; then
   INCCURL="-I/usr/local/include"
   LIBCURL="-L/usr/local/lib -lcurl"
   INCPULSE="-I/usr/local/include"
@@ -1005,7 +1005,8 @@ extern "C" int main(void)
 #endif
 }
 EOF
-    [ -n "$INCCURL" ] && I_INCCURL=`prefix_I "$INCCURL"`
+    #[ -n "$INCCURL" ] && I_INCCURL=`prefix_I "$INCCURL"`
+    I_INCCURL='-I/usr/local/include'
     if test_compile "$LIBCURL $I_INCCURL" libcurl libcurl; then
       if test_execute; then
         cnf_append "SDK_VBOX_LIBCURL_LIBS" "`strip_l "$LIBCURL"`"
