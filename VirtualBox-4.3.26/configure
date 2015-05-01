@@ -933,7 +933,8 @@ extern "C" int main(void)
 #endif
 }
 EOF
-  [ -n "$INCPNG" ] && I_INCPNG=`prefix_I "$INCPNG"`
+  #[ -n "$INCPNG" ] && I_INCPNG=`prefix_I "$INCPNG"`
+  I_INCPNG='-I/usr/local/include'
   if test_compile "$LIBPNG $I_INCPNG" libpng libpng; then
     if test_execute; then
       cnf_append "SDK_VBOX_LIBPNG_LIBS" "`strip_l "$LIBPNG"`"
