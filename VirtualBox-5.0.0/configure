@@ -51,6 +51,8 @@ case "$OS" in
     ;;
   freebsd)
     ;;
+  openbsd)
+    ;;
   sunos)
     OS='solaris'
     ;;
@@ -71,7 +73,7 @@ ODIR_OVERRIDE=0
 OUT_PATH=""
 OUT_PATH_OVERRIDE=0
 SETUP_WINE=
-ONLY_ADDITIONS=0
+ONLY_ADDITIONS=1
 TARGET_MACHINE=""
 TARGET_CPU=""
 WITH_XPCOM=1
