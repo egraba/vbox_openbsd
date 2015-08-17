@@ -347,7 +347,9 @@ static RTDIRENTRYTYPE rtDirType(int iType)
         case DT_REG:        return RTDIRENTRYTYPE_FILE;
         case DT_LNK:        return RTDIRENTRYTYPE_SYMLINK;
         case DT_SOCK:       return RTDIRENTRYTYPE_SOCKET;
+#if !defined(RT_OS_OPENBSD)
         case DT_WHT:        return RTDIRENTRYTYPE_WHITEOUT;
+#endif
         default:
             AssertMsgFailed(("iType=%d\n", iType));
             return RTDIRENTRYTYPE_UNKNOWN;

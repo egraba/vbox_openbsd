@@ -60,7 +60,7 @@ RTDECL(int) RTThreadSleep(RTMSINTERVAL cMillies)
         /* pthread_yield() isn't part of SuS, thus this fun. */
 #ifdef RT_OS_DARWIN
         pthread_yield_np();
-#elif defined(RT_OS_FREEBSD) /* void pthread_yield */
+#elif defined(RT_OS_FREEBSD) || defined(RT_OS_OPENBSD) /* void pthread_yield */
         pthread_yield();
 #elif defined(RT_OS_SOLARIS) || defined(RT_OS_HAIKU)
         sched_yield();
@@ -99,7 +99,7 @@ RTDECL(int) RTThreadSleepNoLog(RTMSINTERVAL cMillies)
         /* pthread_yield() isn't part of SuS, thus this fun. */
 #ifdef RT_OS_DARWIN
         pthread_yield_np();
-#elif defined(RT_OS_FREEBSD) /* void pthread_yield */
+#elif defined(RT_OS_FREEBSD) || defined(RT_OS_OPENBSD)/* void pthread_yield */
         pthread_yield();
 #elif defined(RT_OS_SOLARIS) || defined(RT_OS_HAIKU)
         sched_yield();

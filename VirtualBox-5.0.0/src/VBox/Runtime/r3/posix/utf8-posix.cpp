@@ -194,7 +194,8 @@ static int rtstrConvertCached(const void *pvInput, size_t cbInput, const char *p
             const void *pvInputLeft = pvInput;
             void       *pvOutputLeft = pvOutput;
             size_t      cchNonRev;
-#if defined(RT_OS_LINUX) || defined(RT_OS_HAIKU) || defined(RT_OS_SOLARIS) || (defined(RT_OS_DARWIN) && defined(_DARWIN_FEATURE_UNIX_CONFORMANCE)) /* there are different opinions about the constness of the input buffer. */
+#if defined(RT_OS_LINUX) || defined(RT_OS_HAIKU) || defined(RT_OS_SOLARIS) || (defined(RT_OS_DARWIN) && defined(_DARWIN_FEATURE_UNIX_CONFORMANCE)) \
+	|| defined(RT_OS_OPENBSD) /* there are different opinions about the constness of the input buffer. */
             cchNonRev = iconv(hIconv, (char **)&pvInputLeft, &cbInLeft, (char **)&pvOutputLeft, &cbOutLeft);
 #else
             cchNonRev = iconv(hIconv, (const char **)&pvInputLeft, &cbInLeft, (char **)&pvOutputLeft, &cbOutLeft);
@@ -324,7 +325,8 @@ static int rtStrConvertUncached(const void *pvInput, size_t cbInput, const char 
             const void *pvInputLeft = pvInput;
             void       *pvOutputLeft = pvOutput;
             size_t      cchNonRev;
-#if defined(RT_OS_LINUX) || defined(RT_OS_HAIKU) || defined(RT_OS_SOLARIS) || (defined(RT_OS_DARWIN) && defined(_DARWIN_FEATURE_UNIX_CONFORMANCE)) /* there are different opinions about the constness of the input buffer. */
+#if defined(RT_OS_LINUX) || defined(RT_OS_HAIKU) || defined(RT_OS_SOLARIS) || (defined(RT_OS_DARWIN) && defined(_DARWIN_FEATURE_UNIX_CONFORMANCE)) \
+	|| defined(RT_OS_OPENBSD) /* there are different opinions about the constness of the input buffer. */
             cchNonRev = iconv(icHandle, (char **)&pvInputLeft, &cbInLeft, (char **)&pvOutputLeft, &cbOutLeft);
 #else
             cchNonRev = iconv(icHandle, (const char **)&pvInputLeft, &cbInLeft, (char **)&pvOutputLeft, &cbOutLeft);

@@ -28,7 +28,7 @@
 *   Defined Constants And Macros                                               *
 *******************************************************************************/
 /** Enables the use of POSIX RT timers. */
-#ifndef RT_OS_SOLARIS /* Solaris 10 doesn't have SIGEV_THREAD */
+#if !defined(RT_OS_SOLARIS) && !defined(RT_OS_OPENBSD) /* Solaris 10 doesn't have SIGEV_THREAD */
 # define IPRT_WITH_POSIX_TIMERS
 #endif /* !RT_OS_SOLARIS */
 
@@ -308,7 +308,7 @@ static DECLCALLBACK(int) rttimerThread(RTTHREAD hThreadSelf, void *pvArg)
         {
             siginfo_t SigInfo;
             RT_ZERO(SigInfo);
-#ifdef RT_OS_DARWIN
+#if defined(RT_OS_DARWIN) || defined(RT_OS_OPENBSD)
             if (RT_LIKELY(sigwait(&SigSet, &SigInfo.si_signo) >= 0))
             {
 #else

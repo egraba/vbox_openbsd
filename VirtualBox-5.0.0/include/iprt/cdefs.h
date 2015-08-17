@@ -872,7 +872,8 @@
 #if !defined(RT_EXCEPTIONS_ENABLED) \
  &&  defined(__cplusplus) \
  && (   (defined(_MSC_VER) && defined(_CPPUNWIND)) \
-     || (defined(__GNUC__) && defined(__EXCEPTIONS)))
+     || (defined(__GNUC__) && defined(__EXCEPTIONS))) \
+ && !defined(RT_OS_OPENBSD)
 # define RT_EXCEPTIONS_ENABLED
 #endif
 

@@ -55,6 +55,9 @@ ifndef VBOX_ONLY_VALIDATIONKIT
  ifeq ($(KBUILD_TARGET),freebsd)
   include $(PATH_SUB_CURRENT)/freebsd/Makefile.kmk
  endif
+ ifeq ($(KBUILD_TARGET),openbsd)
+  include $(PATH_SUB_CURRENT)/openbsd/Makefile.kmk
+ endif
  ifeq ($(KBUILD_TARGET),linux)
   include $(PATH_SUB_CURRENT)/linux/Makefile.kmk
  endif
@@ -199,6 +202,13 @@ ifdef VBOX_WITH_ADDITIONS_ISO.freebsd.x86
 	VBoxFreeBSDAdditions-x86.tbz=$(VBOX_PATH_ADDITIONS.freebsd.x86)/VBoxFreeBSDAdditions.tbz
 endif
 
+# OpenBSD
+ifdef VBOX_WITH_ADDITIONS_ISO.openbsd.amd64
+ VBOX_PATH_ADDITIONS.openbsd.amd64 = $(PATH_OUT_BASE)/openbsd.amd64/$(KBUILD_TYPE)/bin/additions
+ GUESTADDITIONS_FILESPEC.openbsd.amd64 = \
+	VBoxOpenBSDAdditions-amd64.tbz=$(VBOX_PATH_ADDITIONS.openbsd.amd64)/VBoxOpenBSDAdditions.tbz
+endif
+
 # GNU/Linux
 ifdef VBOX_WITH_ADDITIONS_ISO.linux.amd64
  VBOX_PATH_ADDITIONS.linux.amd64 = $(PATH_OUT_BASE)/linux.amd64/$(KBUILD_TYPE)/bin/additions
@@ -312,6 +322,7 @@ $(VBOX_PATH_ADDITIONS_ISO)/VBoxGuestAdditions.iso: \
 				$(GUESTADDITIONS_FILESPEC.linux.amd64) \
 				$(GUESTADDITIONS_FILESPEC.freebsd.x86) \
 				$(GUESTADDITIONS_FILESPEC.freebsd.amd64) \
+				$(GUESTADDITIONS_FILESPEC.openbsd.amd64) \
 				$(GUESTADDITIONS_FILESPEC.haiku.x86) \
 				$(GUESTADDITIONS_FILESPEC.darwin.x86) \
 				$(GUESTADDITIONS_FILESPEC.darwin.amd64) \
@@ -335,6 +346,7 @@ $(VBOX_PATH_ADDITIONS_ISO)/VBoxGuestAdditions.iso: \
 		$(GUESTADDITIONS_FILESPEC.linux.amd64) \
 		$(GUESTADDITIONS_FILESPEC.freebsd.x86) \
 		$(GUESTADDITIONS_FILESPEC.freebsd.amd64) \
+		$(GUESTADDITIONS_FILESPEC.openbsd.amd64) \
 		$(GUESTADDITIONS_FILESPEC.haiku.x86) \
 		$(GUESTADDITIONS_FILESPEC.darwin.x86) \
 		$(GUESTADDITIONS_FILESPEC.darwin.amd64)
