@@ -39,6 +39,8 @@ VBoxClient_LIBPATH = \
 	$(VBOX_LIBPATH32_X11)
 VBoxClient_LIBS.freebsd = \
 	iconv
+VBoxClient_LIBS.openbsd = \
+	iconv
 VBoxClient_LIBS.linux = \
 	dl
 VBoxClient_LIBS.solaris = \
@@ -58,8 +60,11 @@ endif
 
 # These are static replacements for gcc-specific parts of libstdc++
 VBoxClient_LIBS += \
-	supc++ \
+	supc++
+ifneq ($(KBUILD_TARGET), openbsd)
+ VBoxClient_LIBS += \
 	gcc_eh
+endif
 ifdef VBOX_X11_SEAMLESS_GUEST
  VBoxClient_DEFS += SEAMLESS_GUEST DYNAMIC_RESIZE
  VBoxClient_SOURCES += \
